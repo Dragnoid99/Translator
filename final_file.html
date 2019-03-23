@@ -1,0 +1,31 @@
+<html>
+        <head>
+        </head>
+        <body>
+                <h1>Translator:</h1>
+                <h3>Enter the text below:</h3>
+                <form><input type="text" id="txt"></form>
+                <button id="button" onclick="api()">Press here</button>
+                <h3>Translated version :</h3>
+                <p id = "result"></p>
+        <script>
+                function api()
+                {
+                        var strng = "";
+                        strng = document.getElementById("txt").value;
+                        var url = 'https://api.funtranslations.com/translate/valyrian.json?text=' + encodeURI(strng);
+                        //document.getElementById("result").innerHTML=str;
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function() 
+                        {
+                                if (this.readyState == 4 && this.status == 200) 
+                                {
+                                        document.getElementById("result").innerHTML = JSON.parse(xhttp.responseText).contents.translated;
+                                }
+                        };
+                        xhttp.open('GET', url, true);
+                        xhttp.send();
+                }
+        </script>
+        </body>
+</html>
